@@ -10,8 +10,10 @@ while read PHS; do
     rm study.cgi?study_id=$PHS
     done <phs.txt  
 
-#make headerless files
+#make headerless and add phs
 for file in phs0*; do
+    PHS=$(basename $file | cut -d "." -f 1)
+    sed -i "" -e "s/^/$PHS      /" $file
     tail -n+2 $file > nohead.$file
     done
 
